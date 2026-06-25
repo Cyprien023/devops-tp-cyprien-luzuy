@@ -57,11 +57,8 @@ Ce projet suit la spécification **[Conventional Commits](https://www.convention
 | `feature`    | Nouvelle fonctionnalité |
 | `fix`      | Correction de bug |
 | `docs`     | Documentation |
-| `style`    | Formatage, pas de changement logique |
-| `refactor` | Refactorisation sans ajout de feature ni fix |
 | `test`     | Ajout ou correction de tests |
-| `chore`    | Maintenance (deps, CI, config…) |
-| `perf`     | Amélioration de performance |
+| `chore`    | Maintenance (CI, config…) |
 
 ### Exemples
 
