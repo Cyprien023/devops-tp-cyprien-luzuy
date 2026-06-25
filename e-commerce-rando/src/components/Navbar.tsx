@@ -1,18 +1,17 @@
 import { Link, useLocation } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function Navbar() {
     const location = useLocation();
     const { count } = useCart();
-
+    const { user, logout } = useAuth();
     const isHome = location.pathname === "/";
 
     return (
-        <nav
-            className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
-                isHome ? "mix-blend-difference" : "bg-[#f2efe8] border-b border-stone-200"
-            }`}
-        >
+        <nav className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
+            isHome ? "mix-blend-difference" : "bg-[#f2efe8] border-b border-stone-200"
+        }`}>
             <div className="flex items-center justify-between px-6 md:px-10 py-5">
                 <Link
                     to="/"
@@ -23,7 +22,7 @@ export default function Navbar() {
                     Summit<span className="opacity-40">Gear</span>
                 </Link>
 
-                <div className="flex items-center gap-8">
+                <div className="flex items-center gap-6">
                     <Link
                         to="/shop"
                         className={`text-xs font-['Barlow'] font-medium tracking-[0.14em] uppercase transition-opacity duration-200
@@ -32,6 +31,33 @@ export default function Navbar() {
                     >
                         Collection
                     </Link>
+
+                    {user ? (
+                        <>
+              <span className={`text-xs font-['Barlow'] font-medium tracking-[0.1em] ${
+                  isHome ? "text-white opacity-70" : "text-stone-500"
+              }`}>
+                {user.firstName}
+              </span>
+                            <button
+                                onClick={logout}
+                                className={`text-xs font-['Barlow'] font-medium tracking-[0.14em] uppercase transition-opacity duration-200 opacity-50 hover:opacity-100
+                  ${isHome ? "text-white" : "text-stone-900"}`}
+                            >
+                                Déconnexion
+                            </button>
+                        </>
+                    ) : (
+                        <Link
+                            to="/login"
+                            className={`text-xs font-['Barlow'] font-medium tracking-[0.14em] uppercase transition-opacity duration-200
+                ${isHome ? "text-white" : "text-stone-900"}
+                ${location.pathname === "/login" ? "opacity-100" : "opacity-50 hover:opacity-100"}`}
+                        >
+                            Connexion
+                        </Link>
+                    )}
+
                     <Link
                         to="/cart"
                         className={`text-xs font-['Barlow'] font-medium tracking-[0.14em] uppercase transition-opacity duration-200 flex items-center gap-2
@@ -40,10 +66,8 @@ export default function Navbar() {
                     >
                         Panier
                         {count > 0 && (
-                            <span
-                                className={`rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-semibold
-                  ${isHome ? "bg-white text-black" : "bg-stone-900 text-white"}`}
-                            >
+                            <span className={`rounded-full w-4 h-4 flex items-center justify-center text-[10px] font-semibold
+                ${isHome ? "bg-white text-black" : "bg-stone-900 text-white"}`}>
                 {count}
               </span>
                         )}
