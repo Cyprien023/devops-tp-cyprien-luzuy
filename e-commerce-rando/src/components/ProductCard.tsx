@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { type Product } from "../data/products";
+import React from "react";
 
 type ProductCardProps = {
     product: Product;
