@@ -1,0 +1,29 @@
+{
+  "name": "devops-tp-cyprien-luzuy",
+  "version": "1.0.0",
+  "description": "Application web e-commerce full-stack permettant aux utilisateurs de parcourir une collection de vêtements techniques de randonnée, de créer un compte, de gérer leur panier en base de données et de passer commande.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest --passWithNoTests",
+    "test:coverage": "jest --coverage --passWithNoTests",
+    "prepare": "husky install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cyprien023/devops-tp-cyprien-luzuy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Cyprien023/devops-tp-cyprien-luzuy/issues"
+  },
+  "homepage": "https://github.com/Cyprien023/devops-tp-cyprien-luzuy#readme",
+  "devDependencies": {
+    "husky": "^8.0.0"
+  }
+}

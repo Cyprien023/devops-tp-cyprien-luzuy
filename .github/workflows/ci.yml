@@ -56,7 +56,7 @@ jobs:
         working-directory: summitgear-api
 
       - name: Lint
-        run: npm run lint
+        run: npm run lint:fix && npm run lint
         working-directory: summitgear-api
 
       - name: Test

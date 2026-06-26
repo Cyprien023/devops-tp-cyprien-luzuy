@@ -35,8 +35,8 @@ export default function Register() {
         try {
             await register(form.email, form.password, form.firstName, form.lastName);
             navigate("/", { replace: true });
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Erreur inconnue");
         } finally {
             setLoading(false);
         }
