@@ -34,9 +34,10 @@ app.use((_req, res) => {
   res.status(404).json({ error: "Route introuvable" });
 });
 
-const PORT = process.env.PORT ?? 3001;
-app.listen(PORT, () => {
-  console.log(`API SummitGear running on http://localhost:${PORT}`);
-});
-
+if (process.env.NODE_ENV !== "test") {
+  const PORT = process.env.PORT ?? 3001;
+  app.listen(PORT, () => {
+    console.log(`API SummitGear running on http://localhost:${PORT}`);
+  });
+}
 export default app;
