@@ -1,5 +1,7 @@
 # SummitGear — E-commerce de vêtements techniques de randonnée
 
+![CI](https://github.com/Cyprien023/devops-tp-cyprien-luzuy/actions/workflows/ci.yml/badge.svg)
+
 Application web e-commerce full-stack permettant aux utilisateurs de parcourir une collection de vêtements techniques de randonnée, de créer un compte, de gérer leur panier en base de données et de passer commande.
 
 ---
