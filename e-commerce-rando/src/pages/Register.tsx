@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import React from "react";
 
 export default function Register() {
     const { register } = useAuth();
@@ -34,8 +35,8 @@ export default function Register() {
         try {
             await register(form.email, form.password, form.firstName, form.lastName);
             navigate("/", { replace: true });
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Erreur inconnue");
         } finally {
             setLoading(false);
         }

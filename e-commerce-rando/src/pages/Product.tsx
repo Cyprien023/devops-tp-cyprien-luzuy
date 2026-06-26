@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { products } from "../data/products";
 import { useCart } from "../context/CartContext";
+import React from "react";
 
 const SIZES = ["XS", "S", "M", "L", "XL", "XXL"];
 

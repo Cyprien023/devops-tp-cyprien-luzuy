@@ -1,12 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import React from "react";
 
 export default function Login() {
     const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const from = (location.state as any)?.from ?? "/";
+    const from = (location.state as { from?: string })?.from ?? "/";
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,8 +21,9 @@ export default function Login() {
         try {
             await login(email, password);
             navigate(from, { replace: true });
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "Erreur inconnue";
+            setError(message);
         } finally {
             setLoading(false);
         }

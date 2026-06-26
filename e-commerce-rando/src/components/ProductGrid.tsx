@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
+import React from "react";
 
 const categories = ["Tout", "Vestes", "Pantalons", "Doudounes", "Couche de base", "Couche intermédiaire"];
 
