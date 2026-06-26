@@ -8,15 +8,12 @@ Application web e-commerce full-stack permettant aux utilisateurs de parcourir u
 
 ## Stack
 
-| Couche | Technologie |
-|---|---|
-| Frontend | React 18, TypeScript, Vite, Tailwind CSS v4 |
-| Routing | React Router v6 |
-| Backend | Node.js, Express, TypeScript |
-| ORM | Prisma 5 |
-| Base de données | PostgreSQL 15 |
-| Auth | JWT (jsonwebtoken), bcryptjs |
-| Sécurité | Helmet, CORS |
+React 18, TypeScript, Vite, Tailwind
+React Router
+Node.js, Express, TypeScript
+Prisma 5
+PostgreSQL 15
+JWT , bcryptjs
 
 ---
 
