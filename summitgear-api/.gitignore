@@ -4,6 +4,7 @@
 .env.*.local
 *.key
 *.pem
+.env.test
 
 # Dépendances
 node_modules/
