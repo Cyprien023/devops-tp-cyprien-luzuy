@@ -10,11 +10,16 @@ const prisma = new PrismaClient();
 // POST /api/auth/register
 router.post("/register", async (req, res) => {
   const { email, password, firstName, lastName } = req.body;
+  if (!email || !password || !firstName || !lastName) {
+    return res.status(400).json({ error: "Tous les champs sont obligatoires" });
+  }
+  if (password.length < 8) {
+    return res.status(400).json({ error: "Mot de passe trop court" });
+  }
   const hash = await bcrypt.hash(password, 12);
   const user = await prisma.user.create({
     data: { email, passwordHash: hash, firstName, lastName },
   });
-  // Créer le panier vide
   await prisma.cart.create({ data: { userId: user.id } });
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, { expiresIn: "7d" });
   res.json({ token, user: { id: user.id, email, firstName, lastName } });
