@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { products } from "../data/products";
+import React from "react";
 
 export default function Shop() {
     return (

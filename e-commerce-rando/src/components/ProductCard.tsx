@@ -20,7 +20,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 />
                 {/* Hover image */}
                 <img
-                    src={product.hoverImage}
+                    src={product.image}
                     alt={product.name}
                     className="absolute inset-0 w-full h-full object-cover opacity-0 scale-105 transition-all duration-700 ease-in-out
                      group-hover:opacity-100 group-hover:scale-100"

@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+
+jobs:
+  backend:
+    name: Backend — lint / test / build
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: summitgear_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/summitgear_test
+      JWT_SECRET: ci_secret_for_tests
+      NODE_ENV: test
+      PORT: 3001
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: summitgear-api/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: summitgear-api
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+        working-directory: summitgear-api
+
+      - name: Run migrations
+        run: npx prisma migrate deploy
+        working-directory: summitgear-api
+
+      - name: Lint
+        run: npm run lint --if-present
+        working-directory: summitgear-api
+
+      - name: Test
+        run: npm test --if-present
+        working-directory: summitgear-api
+
+      - name: Build
+        run: npx tsc --noEmit
+        working-directory: summitgear-api
+
+  frontend:
+    name: Frontend — lint / test / build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: e-commerce-rando/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: e-commerce-rando
+
+      - name: Lint
+        run: npm run lint --if-present
+        working-directory: e-commerce-rando
+
+      - name: Test
+        run: npm test --if-present
+        working-directory: e-commerce-rando
+
+      - name: Build
+        run: npm run build
+        working-directory: e-commerce-rando
