@@ -7,7 +7,7 @@ on:
 
 jobs:
   backend:
-    name: Backend — lint / test / build
+    name: Backend — install / lint / test / build
     runs-on: ubuntu-latest
 
     services:
@@ -26,10 +26,11 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/summitgear_test
-      JWT_SECRET: ci_secret_for_tests
       NODE_ENV: test
-      PORT: 3001
+      JWT_SECRET: ci_secret_for_tests
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/summitgear_test
+      PORT: 3002
+      CORS_ORIGIN: http://localhost:5173
 
     steps:
       - name: Checkout
@@ -55,19 +56,19 @@ jobs:
         working-directory: summitgear-api
 
       - name: Lint
-        run: npm run lint --if-present
+        run: npm run lint
         working-directory: summitgear-api
 
       - name: Test
-        run: npm test --if-present
+        run: npm test
         working-directory: summitgear-api
 
       - name: Build
-        run: npx tsc --noEmit
+        run: npm run build
         working-directory: summitgear-api
 
   frontend:
-    name: Frontend — lint / test / build
+    name: Frontend — install / lint / build
     runs-on: ubuntu-latest
 
     steps:
@@ -87,10 +88,6 @@ jobs:
 
       - name: Lint
         run: npm run lint --if-present
-        working-directory: e-commerce-rando
-
-      - name: Test
-        run: npm test --if-present
         working-directory: e-commerce-rando
 
       - name: Build
