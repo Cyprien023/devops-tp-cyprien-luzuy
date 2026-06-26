@@ -87,4 +87,4 @@ fix(cart): fix quantity not updating on increment
 
 ## Setup local
 
-Voir le [README](./README.md) pour les instructions d'installation en local.
+Voir le [README](../README.md) pour les instructions d'installation en local.
